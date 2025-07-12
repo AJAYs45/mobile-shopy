@@ -1,5 +1,11 @@
+# database.py
+import os
 from pymongo import MongoClient
+from dotenv import load_dotenv
 
-MONGO_URL = "mongodb+srv://ajayop:ajay%40782086@withy-coder.p3o4gob.mongodb.net/?retryWrites=true&w=majority&appName=withy-coder"
-client = MongoClient(MONGO_URL)
+load_dotenv()
+MONGO_URL = os.getenv("MONGO_URL")
+
+# SSL handshake issue fix
+client = MongoClient(MONGO_URL, tls=True, tlsAllowInvalidCertificates=True)
 db = client["mobile_shopy"]
